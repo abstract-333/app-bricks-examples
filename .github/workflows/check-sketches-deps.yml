@@ -1,6 +1,7 @@
 name: Compile sketches to verify dependencies
 on:
   pull_request:
+  workflow_dispatch:
 permissions:
   contents: read
 
@@ -9,10 +10,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Verify sketches
-        uses: arduino/compile-sketches@v1
+        uses: abstract-333/compile-sketches@v1.1.0
         with:
+          enable-cache: true
           fqbn: "arduino:zephyr:unoq"
           sketch-paths: "./examples"
